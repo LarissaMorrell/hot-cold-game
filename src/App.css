@@ -1,5 +1,15 @@
 .App {
+  box-sizing: border-box;
   text-align: center;
+  background-color: rgb(31, 37, 61);
+  color: #fff;
+  height: 100vh;
+  padding: 100px;
+}
+
+.App a {
+  color: #fff;
+  text-decoration: none;
 }
 
 .App-logo {

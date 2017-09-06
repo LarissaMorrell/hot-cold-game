@@ -1,4 +1,5 @@
 import React from 'react';
+import './feedback.css';
 
 export default function GuessList(props){
 
@@ -12,7 +13,7 @@ export default function GuessList(props){
     const guessDiff = Math.abs(props.randomNum - props.guess);
 
     if(guessDiff === 0){
-      return "You Win!";
+      return "You Won. Click new game to play again.";
     }
     else if(guessDiff < 10){
       return "You're on fire!";
@@ -32,7 +33,7 @@ export default function GuessList(props){
   }
 
   return (
-    <p>
+    <p className="feedback">
       {evalGuess()}
     </p>
   );

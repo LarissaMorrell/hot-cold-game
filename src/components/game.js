@@ -27,7 +27,6 @@ export default class Game extends React.Component {
     //is the game finished?
     if(newGuess === this.state.randomNum){
       //TODO option of starting another game
-      alert("You win!");
     }
 
     guesses.push(newGuess);
@@ -37,13 +36,25 @@ export default class Game extends React.Component {
     });
   }
 
+  newGame(){
+    this.setState({
+      guesses: [],
+      randomNum: this.generateRandom()
+    });
+  }
+
+
+
   render(){
     let guesses = this.state.guesses;
 
+
     return (
       <div className='game'>
+        <a onClick={e => this.newGame()} >+ New Game</a>
         <Feedback randomNum={this.state.randomNum} guess={guesses[guesses.length-1]} />
         <GuessForm onSubmitGuess={val => this.setGuesses(val)} />
+        <p>Guess #<span>{guesses.length}</span></p>
         <GuessList guesses={guesses} />
       </div>
     );
