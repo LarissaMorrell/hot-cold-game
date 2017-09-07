@@ -9,9 +9,9 @@ export default class Game extends React.Component {
   constructor(props){
     super(props);
     this.state = {
-      guesses: [],
+      guesses: [1,2,2,3,4,5,6,7,8,9,1,0,1,1,1,3,1,5],
       randomNum: this.generateRandom(),
-      invalidInput: ""
+      message:""
     }
   }
 
@@ -22,22 +22,19 @@ export default class Game extends React.Component {
     return Math.floor(random);
   }
 
-
   setGuesses(newGuess){
-    let guesses = this.state.guesses;
-    if(!this.checkValidInput(newGuess)){
-      //the input isn't valid so exit here
-      return;
-    };
-
+    let guesses = [...this.state.guesses];
     guesses.push(newGuess);
     this.setState({
       guesses: guesses,
-      invalidInput: ""
+      message: ""
     });
   }
-
-
+  setMessage(message){
+    this.setState({
+      message: message
+    });
+  }
   newGame(){
     this.setState({
       guesses: [],
@@ -45,41 +42,12 @@ export default class Game extends React.Component {
     });
   }
 
-
-
-  checkValidInput(newGuess){
-    let guesses = this.state.guesses;
-
-    //the user didn't input anything
-    if(newGuess.length < 1){
-      return false;
-    }
-		if(newGuess % 1 !== 0){
-			this.setState({invalidInput: 'please input a number'});
-			return false;
-		}
-		if(newGuess < 0 || newGuess > 101){
-			this.setState({invalidInput: 'please choose a number between zero and 100'});
-			return false;
-		}
-		if(guesses.length > 0){
-			if(guesses.includes(newGuess)){
-				this.setState({invalidInput: 'You guessed this number already'});
-        return false;
-			}
-		}
-    return true;
-	}
-
-
-
-
   render(){
     let guesses = this.state.guesses;
     return (
       <div className='game'>
-        <Feedback randomNum={this.state.randomNum} guess={guesses[guesses.length-1]} invalidInput={this.state.invalidInput}/>
-        <GuessForm onSubmitGuess={val => this.setGuesses(val)} />
+        <Feedback randomNum={this.state.randomNum} guess={guesses[guesses.length-1]} message={this.state.message}  />
+        <GuessForm guesses={guesses}  onSubmitGuess={val => this.setGuesses(val)} setMessage={message => this.setMessage(message)}  />
         <p className="guess-count">Guess #<span>{guesses.length}</span>!</p>
         <GuessList guesses={guesses} />
         <a onClick={e => this.newGame()} id="new-game">+ NEW GAME</a>
