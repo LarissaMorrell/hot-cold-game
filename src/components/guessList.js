@@ -1,10 +1,9 @@
 import React from 'react';
-import './guessList.css';
 
 export default function GuessList(props){
 
   const guesses = props.guesses.map((guess, index) =>
-    <li key={index}>
+    <li className="guess-box" key={index}>
       {guess}
     </li>
 );

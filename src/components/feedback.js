@@ -1,5 +1,4 @@
 import React from 'react';
-import './feedback.css';
 
 export default function GuessList(props){
 

@@ -1,6 +1,6 @@
 .game {
   margin: 0 auto;
-  width: 350px;
+  width: 450px;
   min-height: 400px;
   background-color: rgb(57, 66, 100);
   color: #000;
@@ -8,4 +8,94 @@
 
 .game span {
   color: rgb(243, 156, 18);
+}
+
+.game input {
+  height: 45px;
+  width: 300px;
+  border: 2px solid rgb(31, 37, 61);
+  border-radius: 10px;
+  font-size: 22pt;
+}
+
+.game input[type=text]{
+  background-color: rgb(80, 89, 123);
+  padding:auto;
+}
+
+.game input::placeholder {
+  font-size: 24pt;
+  color: rgb(149, 165, 166);
+}
+
+input.text {
+  padding: 0.2em;
+  margin: .8em auto 0px;
+}
+
+::-webkit-input-placeholder {
+   text-align: center;
+}
+
+:-moz-placeholder { /* Firefox 18- */
+   text-align: center;
+}
+
+::-moz-placeholder {  /* Firefox 19+ */
+   text-align: center;
+}
+
+:-ms-input-placeholder {
+   text-align: center;
+}
+
+
+input[type="submit"] {
+  align-items: flex-start;
+  display: block;
+  background-color: rgb(31, 37, 61);
+  color: #fff;
+  margin: 0.8em auto 0px;
+}
+
+
+
+
+
+
+.feedback {
+  background-color: rgb(204, 50, 75);
+  color: #fff;
+  font-size: 20pt;
+  padding: 20px 10px;
+}
+
+
+
+
+
+.guess-form {
+  background-color: rgb(57, 66, 100);
+  text-decoration-color: white;
+}
+
+
+
+
+ul.guess-list {
+  background-color: rgb(17, 167, 170);
+  min-height: 75px;
+  padding: .9em;
+  margin: 10px auto 0px;
+  
+}
+
+li.guess-box {
+  display: inline;
+  font-size: 18px;
+  background-color: rgb(26, 78, 149);
+  color: #fff;
+  border-radius: 4px;
+  margin: 0.2em;
+  padding: 0.5em;
 }
