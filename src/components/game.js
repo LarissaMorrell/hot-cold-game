@@ -9,8 +9,9 @@ export default class Game extends React.Component {
   constructor(props){
     super(props);
     this.state = {
-      guesses: [],
-      randomNum: this.generateRandom()
+      guesses: [1,2,2,3,4,5,6,7,8,9,1,0,1,1,1,3,1,5],
+      randomNum: this.generateRandom(),
+      message:""
     }
   }
 
@@ -21,18 +22,19 @@ export default class Game extends React.Component {
     return Math.floor(random);
   }
 
-
   setGuesses(newGuess){
     let guesses = [...this.state.guesses];
-
     guesses.push(newGuess);
     this.setState({
       guesses: guesses,
-      invalidInput: ""
+      message: ""
     });
   }
-
-
+  setMessage(message){
+    this.setState({
+      message: message
+    });
+  }
   newGame(){
     this.setState({
       guesses: [],
@@ -40,15 +42,12 @@ export default class Game extends React.Component {
     });
   }
 
-
-
-
   render(){
     let guesses = this.state.guesses;
     return (
       <div className='game'>
-        <Feedback randomNum={this.state.randomNum} guess={guesses[guesses.length-1]}/>
-        <GuessForm onSubmitGuess={val => this.setGuesses(val)} />
+        <Feedback randomNum={this.state.randomNum} guess={guesses[guesses.length-1]} message={this.state.message}  />
+        <GuessForm guesses={guesses}  onSubmitGuess={val => this.setGuesses(val)} setMessage={message => this.setMessage(message)}  />
         <p className="guess-count">Guess #<span>{guesses.length}</span>!</p>
         <GuessList guesses={guesses} />
         <a onClick={e => this.newGame()} id="new-game">+ NEW GAME</a>
