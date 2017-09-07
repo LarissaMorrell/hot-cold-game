@@ -4,6 +4,7 @@
   min-height: 400px;
   background-color: rgb(57, 66, 100);
   color: #000;
+  border-radius: 10px;
 }
 
 #new-game {
@@ -30,8 +31,13 @@
 .game input[type=text]{
   background-color: rgb(80, 89, 123);
   padding:auto;
+  text-align: center;
 }
 
+.game input[type=text]:focus {
+  box-shadow: none;
+  outline: 0 none;
+}
 .game input::placeholder {
   font-size: 24pt;
   color: rgb(149, 165, 166);
@@ -63,9 +69,10 @@ input[type="submit"] {
   align-items: flex-start;
   display: block;
   background-color: rgb(31, 37, 61);
-  color: #fff;
+  color: rgb(149, 165, 166);
   margin: 0.8em auto 0px;
   padding: auto;
+  /*transition: background 1s ease-in-out;*/
 }
 
 .guess-count {
