@@ -5,10 +5,19 @@ export default function GuessList(props){
 
   function evalGuess(){
 
+
+    //is the input valid?
+    if(props.invalidInput.length > 0){
+      return props.invalidInput;
+    }
+
     //before any guesses are made
     if(!props.guess){
       return "Guess a number from 1 to 100";
     }
+
+
+
 
     const guessDiff = Math.abs(props.randomNum - props.guess);
 

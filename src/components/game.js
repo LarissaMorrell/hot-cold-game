@@ -10,7 +10,8 @@ export default class Game extends React.Component {
     super(props);
     this.state = {
       guesses: [],
-      randomNum: this.generateRandom()
+      randomNum: this.generateRandom(),
+      invalidInput: ""
     }
   }
 
@@ -21,20 +22,22 @@ export default class Game extends React.Component {
     return Math.floor(random);
   }
 
+
+
   setGuesses(newGuess){
     let guesses = this.state.guesses;
-
-    //is the game finished?
-    if(newGuess === this.state.randomNum){
-      //TODO option of starting another game
-    }
+    if(!this.checkValidInput(newGuess)){
+      //the input isn't valid so exit here
+      return;
+    };
 
     guesses.push(newGuess);
-
     this.setState({
-      guesses: guesses
+      guesses: guesses,
+      invalidInput: ""
     });
   }
+
 
   newGame(){
     this.setState({
@@ -45,17 +48,38 @@ export default class Game extends React.Component {
 
 
 
+  checkValidInput(newGuess){
+    let guesses = this.state.guesses;
+    console.log("checking guess");
+		if(newGuess % 1 !== 0){
+			this.setState({invalidInput: 'please input a number'});
+			return false;
+		}
+		if(newGuess < 0 || newGuess > 101){
+			this.setState({invalidInput: 'please choose a number between zero and 100'});
+			return false;
+		}
+		if(guesses.length > 0){
+			if(guesses.includes(newGuess)){
+				this.setState({invalidInput: 'You guessed this number already'});
+        return false;
+			}
+		}
+    return true;
+	}
+
+
+
+
   render(){
     let guesses = this.state.guesses;
-
-
     return (
       <div className='game'>
-        <a onClick={e => this.newGame()} >+ New Game</a>
-        <Feedback randomNum={this.state.randomNum} guess={guesses[guesses.length-1]} />
+        <Feedback randomNum={this.state.randomNum} guess={guesses[guesses.length-1]} invalidInput={this.state.invalidInput}/>
         <GuessForm onSubmitGuess={val => this.setGuesses(val)} />
-        <p>Guess #<span>{guesses.length}</span></p>
+        <p>Guess <span>{guesses.length}</span></p>
         <GuessList guesses={guesses} />
+        <a onClick={e => this.newGame()} >+ New Game</a>
       </div>
     );
   }
