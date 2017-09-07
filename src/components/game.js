@@ -10,8 +10,7 @@ export default class Game extends React.Component {
     super(props);
     this.state = {
       guesses: [],
-      randomNum: this.generateRandom(),
-      invalidInput: ""
+      randomNum: this.generateRandom()
     }
   }
 
@@ -24,11 +23,7 @@ export default class Game extends React.Component {
 
 
   setGuesses(newGuess){
-    let guesses = this.state.guesses;
-    if(!this.checkValidInput(newGuess)){
-      //the input isn't valid so exit here
-      return;
-    };
+    let guesses = [...this.state.guesses];
 
     guesses.push(newGuess);
     this.setState({
@@ -47,38 +42,12 @@ export default class Game extends React.Component {
 
 
 
-  checkValidInput(newGuess){
-    let guesses = this.state.guesses;
-
-    //the user didn't input anything
-    if(newGuess.length < 1){
-      return false;
-    }
-		if(newGuess % 1 !== 0){
-			this.setState({invalidInput: 'please input a number'});
-			return false;
-		}
-		if(newGuess < 0 || newGuess > 101){
-			this.setState({invalidInput: 'please choose a number between zero and 100'});
-			return false;
-		}
-		if(guesses.length > 0){
-			if(guesses.includes(newGuess)){
-				this.setState({invalidInput: 'You guessed this number already'});
-        return false;
-			}
-		}
-    return true;
-	}
-
-
-
 
   render(){
     let guesses = this.state.guesses;
     return (
       <div className='game'>
-        <Feedback randomNum={this.state.randomNum} guess={guesses[guesses.length-1]} invalidInput={this.state.invalidInput}/>
+        <Feedback randomNum={this.state.randomNum} guess={guesses[guesses.length-1]}/>
         <GuessForm onSubmitGuess={val => this.setGuesses(val)} />
         <p className="guess-count">Guess #<span>{guesses.length}</span>!</p>
         <GuessList guesses={guesses} />
