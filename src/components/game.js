@@ -9,7 +9,7 @@ export default class Game extends React.Component {
   constructor(props){
     super(props);
     this.state = {
-      guesses: [1,2,2,3,4,5,6,7,8,9,1,0,1,1,1,3,1,5],
+      guesses: [],
       randomNum: this.generateRandom(),
       message:""
     }
@@ -30,11 +30,13 @@ export default class Game extends React.Component {
       message: ""
     });
   }
+
   setMessage(message){
     this.setState({
       message: message
     });
   }
+
   newGame(){
     this.setState({
       guesses: [],

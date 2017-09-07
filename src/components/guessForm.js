@@ -4,9 +4,12 @@ export default class GuessForm extends React.Component{
 
 
   submitInput(newGuess){
-    this.guessInput.value = ""
+    //reset what is in the text input
+    this.guessInput.value = "";
+
     let guesses = this.props.guesses;
 
+    //if the input is bad, go back to Board and setMessage
     if(newGuess.length < 1){
       return
     }
@@ -25,14 +28,11 @@ export default class GuessForm extends React.Component{
       }
     }
 
+    //otherwise, go back to Game and setGuesses
     this.props.onSubmitGuess(newGuess);
   }
 
 
-
-// TODO
-// input clearing
-// Wrapping guesses.
 
   render(){
 
