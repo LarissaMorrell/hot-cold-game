@@ -9,7 +9,7 @@ export default class GuessForm extends React.Component{
 
         <input type="text" id="newGuess" name="newGuess"
           ref={input => this.guessInput = input }
-          placeholder="Enter your Guess" />
+          placeholder="Enter your Guess" required/>
 
         <input type="submit" value="Guess"
           onClick={ () => this.props.onSubmitGuess(

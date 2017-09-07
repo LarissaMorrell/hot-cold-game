@@ -4,8 +4,7 @@ export default function GuessList(props){
 
   function evalGuess(){
 
-
-    //is the input valid?
+    //is the input valid? If it is the length will be 0
     if(props.invalidInput.length > 0){
       return props.invalidInput;
     }

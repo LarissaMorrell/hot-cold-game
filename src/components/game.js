@@ -23,7 +23,6 @@ export default class Game extends React.Component {
   }
 
 
-
   setGuesses(newGuess){
     let guesses = this.state.guesses;
     if(!this.checkValidInput(newGuess)){
@@ -50,7 +49,11 @@ export default class Game extends React.Component {
 
   checkValidInput(newGuess){
     let guesses = this.state.guesses;
-    console.log("checking guess");
+
+    //the user didn't input anything
+    if(newGuess.length < 1){
+      return false;
+    }
 		if(newGuess % 1 !== 0){
 			this.setState({invalidInput: 'please input a number'});
 			return false;
@@ -77,9 +80,9 @@ export default class Game extends React.Component {
       <div className='game'>
         <Feedback randomNum={this.state.randomNum} guess={guesses[guesses.length-1]} invalidInput={this.state.invalidInput}/>
         <GuessForm onSubmitGuess={val => this.setGuesses(val)} />
-        <p>Guess <span>{guesses.length}</span></p>
+        <p className="guess-count">Guess #<span>{guesses.length}</span>!</p>
         <GuessList guesses={guesses} />
-        <a onClick={e => this.newGame()} >+ New Game</a>
+        <a onClick={e => this.newGame()} id="new-game">+ NEW GAME</a>
       </div>
     );
   }
